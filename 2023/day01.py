@@ -1,8 +1,8 @@
 with open("inputs/inp01.txt") as fh:
     lines = fh.read().split('\n')
 
-def calc(lines):
-    calcs = []
+def calibrate(lines):
+    values = []
     for line in lines:
         first, last = 0,0
         for char in line:
@@ -13,8 +13,8 @@ def calc(lines):
             if char.isnumeric():
                 last = char
                 break
-        calcs.append(int(str(first)+str(last)))
-    return calcs
+        values.append(int(str(first)+str(last)))
+    return values
 
 p2 = []
 for line in lines:
@@ -29,5 +29,5 @@ for line in lines:
     line = line.replace("nine", "n9e")
     p2.append(line)
 
-print(sum(calc(lines))) # part 1
-print(sum(calc(p2))) # part 2
+print(sum(calibrate(lines))) # part 1
+print(sum(calibrate(p2))) # part 2
