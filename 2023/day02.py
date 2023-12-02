@@ -1,7 +1,7 @@
 import re
 
 with open("inputs/inp02.txt") as fh:
-    INPUT = fh.read().split('\n')
+    INPUT = fh.read().rstrip().split('\n')
     games = [line.split(": ") for line in INPUT]
 
 p1, p2 = [], []
