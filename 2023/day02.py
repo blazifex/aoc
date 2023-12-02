@@ -9,19 +9,12 @@ r_min, g_min, b_min = 12, 13, 14
 
 for game, pulls in games:
     d = {'id': re.search('\d+', game).group(0), 'blue': 0, 'red': 0, 'green': 0}
-    pulls = [pull.split(', ') for pull in pulls.split('; ')]
     red, green, blue = [], [], []
-    for pull in pulls:
-        for cube in pull:
-            if re.search('red', cube):
-                red.append(int(re.search('\d+', cube).group(0)))
-            if re.search('green', cube):
-                green.append(int(re.search('\d+', cube).group(0)))
-            if re.search('blue', cube):
-                blue.append(int(re.search('\d+', cube).group(0)))
-    d['red'] = max(red)
-    d['green'] = max(green)
-    d['blue'] = max(blue)
+    pattern = r'(\d+) (red|green|blue)'
+    for pull in pulls.split(';'):
+        for count, colour in re.findall(pattern, pull): 
+            if int(count) > d[colour]: d[colour] = int(count)
+
     if d['red'] <= r_min and d['green'] <= g_min and d['blue'] <= b_min: p1.append(int(d['id']))
     p2.append(d['blue']*d['red']*d['green'])
 
