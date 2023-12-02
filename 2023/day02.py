@@ -1,8 +1,8 @@
 import re
 
 with open("inputs/inp02.txt") as fh:
-    lines = fh.read().split('\n')
-    games = [line.split(": ") for line in lines]
+    INPUT = fh.read().split('\n')
+    games = [line.split(": ") for line in INPUT]
 
 p1, p2 = [], []
 r_min, g_min, b_min = 12, 13, 14
