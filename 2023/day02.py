@@ -28,5 +28,3 @@ for game in games:
 
 print(sum(p1))
 print(sum(p2))
-
-        
