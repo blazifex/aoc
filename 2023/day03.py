@@ -29,7 +29,6 @@ def check_adj(num, char):
         if num['col_start']-1 <= char['col_start'] <= num['col_end']+1: return True #if char is above number, incl. adjacent
     return False
 
-
 def p1(nums, chars, arr = []):
     for num in nums:
         for char in chars:
