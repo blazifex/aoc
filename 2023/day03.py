@@ -1,6 +1,7 @@
-import re
+import re, time
 
 def main():
+    startTime = time.time()
     with open("inputs/inp03.txt") as fh:
         INPUT = fh.read().rstrip().split('\n')
 
@@ -11,6 +12,7 @@ def main():
         parse(line_id, re.finditer('[^\d\.]', line), chars)
     p1(nums, chars)
     p2(nums, chars)
+    print ('[Finished in {:.2f}ms]'.format(1000*(time.time() - startTime)))
 
 def parse(line_id, results, arr):
     for result in results:
@@ -50,4 +52,4 @@ def p2(nums, chars, arr = []):
                 arr.append(result)
     print(sum(arr))
 
-main()
+if __name__ == "__main__": main()
