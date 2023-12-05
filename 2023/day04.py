@@ -1,4 +1,4 @@
-import re, time
+import time
 
 startTime = time.time()
 
