@@ -33,40 +33,28 @@ def calc(hands: list[str, str], joker_rule: bool):
         if re.search(r'(.)\1{4,}', x): fives.append(h) # check 5 of a kind
 
         elif re.search(r'(.)\1{3,}', x): # check 4 of a kind
-            if joker_rule:
-                if x.count('1') > 0: fives.append(h)
-                else: fours.append(h)
+            if x.count('1') > 0: fives.append(h)
             else: fours.append(h)
         
         elif re.search(r'(.)\1{2,}(.)\2{1,}', x) or re.search(r'(.)\1{1,}(.)\2{2,}', x): # check full house  
-            if joker_rule:
-                if x.count('1') > 0: fives.append(h)
-                else: fulls.append(h)
+            if x.count('1') > 0: fives.append(h)
             else: fulls.append(h)
 
         elif re.search(r'(.)\1{2,}', x): # check 3 of a kind
-            if joker_rule:
-                if x.count('1') == 1 or x.count('1') == 3: fours.append(h)
-                else: threes.append(h)
+            if x.count('1') == 1 or x.count('1') == 3: fours.append(h)
             else: threes.append(h)
         
         elif re.search(r'^(?=.*(.).*?\1)(?=.*(?!\1)(.).*?\2).*', x): # check two pairs
-            if joker_rule:
-                if x.count('1') == 1: fulls.append(h)
-                elif x.count('1') == 2: fours.append(h)
-                else: twos.append(h)
+            if x.count('1') == 1: fulls.append(h)
+            elif x.count('1') == 2: fours.append(h)
             else: twos.append(h)
         
         elif re.search(r'(.)\1{1,}', x): # check one pair
-            if joker_rule:
-                if x.count('1') == 1 or x.count('1') == 2: threes.append(h)
-                else: ones.append(h)
+            if x.count('1') == 1 or x.count('1') == 2: threes.append(h)
             else: ones.append(h)
         
         else: # high card
-            if joker_rule:
-                if x.count('1') == 1: ones.append(h)
-                else: high.append(h)
+            if x.count('1') == 1: ones.append(h)
             else: high.append(h)
 
     combined = sorted(high)+sorted(ones)+sorted(twos)+sorted(threes)+sorted(fulls)+sorted(fours)+sorted(fives)
