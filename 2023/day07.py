@@ -1,12 +1,11 @@
-import re, numpy as np
+import re, time
+
+startTime = time.time()
 
 with open("inputs/inp07.txt") as fh:
     INPUT = fh.read().rstrip().split('\n')
 
 hands = [line.split() for line in INPUT]
-power = ['A','K','Q','J','T','9','8','7','6','5','4','3','2']
-
-p1 = 0
 
 fives = [] # five of a kind
 fours = [] # four of a kind
@@ -15,7 +14,6 @@ threes = [] # three of a kind
 twos = [] # two pair
 ones = [] # one pair
 high = [] # high card
-
 
 for h in hands:
     h[0] = h[0].translate(str.maketrans('TJQKA', 'ABCDE'))
@@ -29,9 +27,9 @@ for h in hands:
     else: high.append(h)
 
 combined = sorted(high)+sorted(ones)+sorted(twos)+sorted(threes)+sorted(fulls)+sorted(fours)+sorted(fives)
-#print(combined)
-for id, h in enumerate(combined): p1+= int(h[1])*(id+1)
 
+p1 = 0
+for id, h in enumerate(combined): p1+= int(h[1])*(id+1)
 print(p1)
 
 """                 PART 2                  """
@@ -45,8 +43,7 @@ ones = [] # one pair
 high = [] # high card
 
 for h in hands:
-    h[0] = h[0].translate(str.maketrans('ABCDE', 'TJQKA'))
-    h[0] = h[0].translate(str.maketrans('TQKAJ', 'ABCD1'))
+    h[0] = h[0].translate(str.maketrans('B', '1'))
     x = ''.join(sorted(h[0]))
     if re.search(r'(.)\1{4,}', x): fives.append(h) # check 5 of a kind
     elif re.search(r'(.)\1{3,}', x): # check 4 of a kind
@@ -78,3 +75,5 @@ for id, h in enumerate(combined):
     p2+= int(h[1])*(id+1)
 
 print(p2)
+
+print ('[Finished in {:.2f}ms]'.format(1000*(time.time() - startTime)))
