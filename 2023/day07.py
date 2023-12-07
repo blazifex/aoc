@@ -43,7 +43,7 @@ ones = [] # one pair
 high = [] # high card
 
 for h in hands:
-    h[0] = h[0].translate(str.maketrans('B', '1'))
+    h[0] = h[0].translate(str.maketrans('B', '1')) # replace jokers (previously changed to B) to 1 to sort @ end
     x = ''.join(sorted(h[0]))
     if re.search(r'(.)\1{4,}', x): fives.append(h) # check 5 of a kind
     elif re.search(r'(.)\1{3,}', x): # check 4 of a kind
