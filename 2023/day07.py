@@ -56,11 +56,14 @@ for h in hands:
         if x.count('1') == 1 or x.count('1') == 3: fours.append(h)
         else: threes.append(h) 
     elif re.search(r'^(?=.*(.).*?\1)(?=.*(?!\1)(.).*?\2).*', x): # check two pairs
-        if x.count('1') == 1: fulls.append(h)
-        elif x.count('1') == 2: fours.append(h)
+        if x.count('1') == 1: 
+            fulls.append(h)
+        elif x.count('1') == 2:
+            #print(x)
+            fours.append(h)
         else: twos.append(h)
     elif re.search(r'(.)\1{1,}', x): # check one pair
-        if x.count('1') == 1: threes.append(h)
+        if x.count('1') == 1 or x.count('1') == 2: threes.append(h)
         else: ones.append(h)
     else: 
         if x.count('1') == 1: ones.append(h)
@@ -75,5 +78,6 @@ for id, h in enumerate(combined):
     p2+= int(h[1])*(id+1)
 
 print(p2)
+# smitty test = 249631254
 
 print ('[Finished in {:.2f}ms]'.format(1000*(time.time() - startTime)))
