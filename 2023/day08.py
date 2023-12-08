@@ -15,10 +15,8 @@ def main():
     a_locs = []
 
     for line in block.split('\n'):
-        loc = re.search(r'.{3}(?= )', line).group()
+        loc, l, r = re.findall(r'\w+', line)
         if loc[2] == 'A': a_locs.append(loc)
-        l = re.search(r'.{3}(?=\,)', line).group()
-        r = re.search(r'.{3}(?=\))', line).group()
         nodes.append({'loc': loc, 'l': l, 'r': r})
     
     p1(steps)
