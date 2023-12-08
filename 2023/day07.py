@@ -1,5 +1,5 @@
 import re
-from time import time as time
+from time import time
 from copy import deepcopy as copy
 
 def main():
