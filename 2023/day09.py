@@ -6,10 +6,10 @@ p1, p2 = [], []
 with open("inputs/inp09.txt") as fh:
     INPUT = fh.read().rstrip().split('\n')
 
-def get_next(nums, part):
+def get_next(vals, part):
     nxt = []
-    for id, num in enumerate(nums[1:], 1):
-        nxt.append(num - nums[id-1])
+    for id, val in enumerate(vals[1:], 1):
+        nxt.append(val - vals[id-1])
     if nxt.count(0) != len(nxt): 
         if part == 1: nxt.append(nxt[-1] + get_next(nxt, 1))
         else: nxt.append(nxt[0] - get_next(nxt, 2))
@@ -17,9 +17,9 @@ def get_next(nums, part):
     return nxt[-1]
 
 for line in INPUT:
-    nums = list(map(int, line.split()))
-    p1.append(nums[-1] + get_next(nums, 1))
-    p2.append(nums[0] - get_next(nums, 2))
+    x = list(map(int, line.split()))
+    p1.append(x[-1] + get_next(x, 1))
+    p2.append(x[0] - get_next(x, 2))
 
 print(sum(p1))
 print(sum(p2))
