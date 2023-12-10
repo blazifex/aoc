@@ -111,9 +111,9 @@ for row, line in enumerate(INPUT):
         if re.match (r'│|└|┘', char): # don't need to count ┌ or ┐ as they need to be paired with └ and ┘ to make a wall
             walls += 1
         elif walls % 2 == 1 and not re.match (r'─|│|┌|┐|└|┘', char): 
-            INPUT[row][col] = 'I'
+            #INPUT[row][col] = 'I' # for easier print debugging
             p2+= 1
-        elif not re.match (r'─|│|┌|┐|└|┘', char): INPUT[row][col] = 'O'
+        #elif not re.match (r'─|│|┌|┐|└|┘', char): INPUT[row][col] = 'O' # for easier print debugging
             
 #for line in INPUT: print(''.join(line)) # print map for debugging
 
