@@ -1,7 +1,7 @@
 from time import time
 import re
 
-startTime = time()
+st_time = time()
 
 with open("inputs/inp10.txt") as fh:
     INPUT = fh.read().rstrip().split('\n')
@@ -9,7 +9,7 @@ with open("inputs/inp10.txt") as fh:
 for r, line in enumerate(INPUT):
     INPUT[r] = list(line)
     for c, char in enumerate(line):
-        if char == 'S': start = [r, c]
+        if char == 'S': st = [r, c]
 
 path = []
 def step(r, c, d):
@@ -87,14 +87,14 @@ def step(r, c, d):
             path.append([r, c])
             break
 
-step(start[0], start[1]+1, 'e') # check east of start
-if len(path) == 0: step(start[0], start[1]-1, 'w') # check west of start
-if len(path) == 0: step(start[0]-1, start[1], 'n') # check north of start
-if len(path) == 0: step(start[0]+1, start[1], 's') # check south of start
+step(st[0], st[1]+1, 'e') # check east of start
+if len(path) == 0: step(st[0], st[1]-1, 'w') # check west of start
+if len(path) == 0: step(st[0]-1, st[1], 'n') # check north of start
+if len(path) == 0: step(st[0]+1, st[1], 's') # check south of start
 
 #make printable
-for n in path:
-    r, c = n[0], n[1]
+for p in path:
+    r, c = p[0], p[1]
     INPUT[r][c] = INPUT[r][c].translate(str.maketrans("-|F7LJS", "─│┌┐└┘│")) # manually check which S should be replaced with by inspection
 
 p2 = 0
@@ -112,4 +112,4 @@ for r, line in enumerate(INPUT):
 
 print(round(len(path)/2)) # part 1
 print(p2) # part 2
-print ('[Finished in {:.2f}ms]'.format(1000*(time() - startTime)))
+print ('[Finished in {:.2f}ms]'.format(1000*(time() - st_time)))
