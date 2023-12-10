@@ -15,7 +15,6 @@ path = []
 def step(r, c, d):
     global path
     path = []
-    dist = 0
     while True:
         if r < 0 or r > len(INPUT)-1: break
         elif c < 0 or c > len(INPUT[0])-1: break
@@ -87,7 +86,6 @@ def step(r, c, d):
         elif INPUT[r][c] == 'S':
             path.append([r, c])
             break
-    return dist
 
 step(start[0], start[1]+1, 'e') # check east of start
 if len(path) == 0: step(start[0], start[1]-1, 'w') # check west of start
