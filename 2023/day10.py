@@ -6,91 +6,86 @@ startTime = time()
 with open("inputs/inp10.txt") as fh:
     INPUT = fh.read().rstrip().split('\n')
 
-for row, line in enumerate(INPUT):
-    INPUT[row] = list(line)
-    for col, char in enumerate(line):
-        if char == 'S': start = [row, col]
+for r, line in enumerate(INPUT):
+    INPUT[r] = list(line)
+    for c, char in enumerate(line):
+        if char == 'S': start = [r, c]
 
 path = []
-def step(row, col, dr):
+def step(r, c, d):
     global path
     path = []
     dist = 0
     while True:
-        dist += 1
-        if row < 0 or row > len(INPUT)-1: 
-            dist = 0
+        if r < 0 or r > len(INPUT)-1: break
+        elif c < 0 or c > len(INPUT[0])-1: break
+        elif INPUT[r][c] == '.':
+            path.append([r, c])
             break
-        elif col < 0 or col > len(INPUT[0])-1: 
-            dist = 0
-            break
-        elif INPUT[row][col] == '.':
-            path.append([row, col])
-            break
-        elif INPUT[row][col] == '|':
-            path.append([row, col])
-            if dr == 's':
-                row += 1
-            elif dr == 'n': 
-                row -= 1
+        elif INPUT[r][c] == '|':
+            path.append([r, c])
+            if d == 's':
+                r += 1
+            elif d == 'n': 
+                r -= 1
             else:
                 path = []
                 break
-        elif INPUT[row][col] == '-':
-            path.append([row, col])
-            if dr == 'e': 
-                col += 1
-            elif dr == 'w': 
-                col -= 1
+        elif INPUT[r][c] == '-':
+            path.append([r, c])
+            if d == 'e': 
+                c += 1
+            elif d == 'w': 
+                c -= 1
             else: 
                 path = []
                 break
-        elif INPUT[row][col] == 'L':
-            path.append([row, col])
-            if dr == 's': 
-                col += 1
-                dr = 'e'
-            elif dr == 'w': 
-                row -= 1
-                dr = 'n'
+        elif INPUT[r][c] == 'L':
+            path.append([r, c])
+            if d == 's': 
+                c += 1
+                d = 'e'
+            elif d == 'w': 
+                r -= 1
+                d = 'n'
             else: 
                 path = []
                 break
-        elif INPUT[row][col] == 'J':
-            path.append([row, col])
-            if dr == 'e':
-                row -= 1
-                dr = 'n'
-            elif dr == 's': 
-                col -= 1
-                dr = 'w'
+        elif INPUT[r][c] == 'J':
+            path.append([r, c])
+            if d == 'e':
+                r -= 1
+                d = 'n'
+            elif d == 's': 
+                c -= 1
+                d = 'w'
             else: 
                 path = []
                 break
-        elif INPUT[row][col] == '7':
-            path.append([row, col])
-            if dr == 'e': 
-                row += 1
-                dr = 's'
-            elif dr == 'n': 
-                col -= 1
-                dr = 'w'
+        elif INPUT[r][c] == '7':
+            path.append([r, c])
+            if d == 'e': 
+                r += 1
+                d = 's'
+            elif d == 'n': 
+                c -= 1
+                d = 'w'
             else: 
                 path = []
                 break
-        elif INPUT[row][col] == 'F':
-            path.append([row, col])
-            if dr == 'n': 
-                col += 1
-                dr = 'e'
-            elif dr == 'w': 
-                row += 1
-                dr = 's'
+        elif INPUT[r][c] == 'F':
+            path.append([r, c])
+            if d == 'n': 
+                c += 1
+                d = 'e'
+            elif d == 'w': 
+                r += 1
+                d = 's'
             else:
                 path = []
                 break
-        elif INPUT[row][col] == 'S':
-            path.append([row, col])
+        elif INPUT[r][c] == 'S':
+            path.append([r, c])
             break
     return dist
 
@@ -101,19 +96,19 @@ if len(path) == 0: step(start[0]+1, start[1], 's') # check south of start
 
 #make printable
 for n in path:
-    row, col = n[0], n[1]
-    INPUT[row][col] = INPUT[row][col].translate(str.maketrans("-|F7LJS", "─│┌┐└┘│")) # manually check which S should be replaced with by inspection
+    r, c = n[0], n[1]
+    INPUT[r][c] = INPUT[r][c].translate(str.maketrans("-|F7LJS", "─│┌┐└┘│")) # manually check which S should be replaced with by inspection
 
 p2 = 0
-for row, line in enumerate(INPUT):
+for r, line in enumerate(INPUT):
     walls = 0
-    for col, char in enumerate(line):
+    for c, char in enumerate(line):
         if re.match (r'│|└|┘', char): # don't need to count ┌ or ┐ as they need to be paired with └ and ┘ to make a wall
             walls += 1
         elif walls % 2 == 1 and not re.match (r'─|│|┌|┐|└|┘', char): 
-            #INPUT[row][col] = 'I' # for easier print debugging
+            #INPUT[r][c] = 'I' # for easier print debugging
             p2+= 1
-        #elif not re.match (r'─|│|┌|┐|└|┘', char): INPUT[row][col] = 'O' # for easier print debugging
+        #elif not re.match (r'─|│|┌|┐|└|┘', char): INPUT[r][c] = 'O' # for easier print debugging
             
 #for line in INPUT: print(''.join(line)) # print map for debugging
 
