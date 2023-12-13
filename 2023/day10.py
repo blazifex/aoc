@@ -97,6 +97,12 @@ for p in path:
     r, c = p[0], p[1]
     INPUT[r][c] = INPUT[r][c].translate(str.maketrans("-|F7LJS", "─│┌┐└┘│")) # manually check which S should be replaced with by inspection
 
+l_r, l_c = path[-2][0], path[-2][1]
+f_r, f_c = path[0][0], path[0][1]
+print(INPUT[f_r][f_c])
+print(INPUT[l_r][l_c])
+
+
 p2 = 0
 for r, line in enumerate(INPUT):
     walls = 0
