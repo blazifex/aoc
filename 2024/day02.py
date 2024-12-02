@@ -9,7 +9,7 @@ def is_safe(line: list):
         for x in range(len(line)-1):
             if not 1 <= (abs(line[x] - line[x+1])) <= 3: return False
         return True
-    return False
+    else: return False
 
 for line in lines:
     line = [int(x) for x in line.split()]
