@@ -19,9 +19,9 @@ for line in lines:
     elif is_safe(x): p2+=1
     else:
         for n in range(len(line)-1):
-            z = copy.deepcopy(line)
-            z.pop(n)
-            if is_safe(z): 
+            y = copy.deepcopy(line)
+            y.pop(n)
+            if is_safe(y): 
                 p2+=1
                 break
 
