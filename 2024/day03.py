@@ -1,6 +1,6 @@
 import re
 
-with open("inp03.txt") as fh: 
+with open("inputs/inp03.txt") as fh: 
     lines = fh.read().strip().split('\n')
 
 p1, p2 = 0, 0

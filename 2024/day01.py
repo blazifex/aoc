@@ -1,4 +1,4 @@
-with open("inp01.txt") as fh:
+with open("inputs/inp01.txt") as fh:
     lines = fh.read().split('\n')
 
 l, r = [], []
