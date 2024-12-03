@@ -7,8 +7,7 @@ p1, p2 = 0, 0
 line = ''
 enabled = []
 
-for x in lines:
-    line += x
+for x in lines: line += x
 
 def calc(line: str, ans = 0):
     for x in re.findall(r'mul\([0-9]+\,[0-9]+\)', line):
