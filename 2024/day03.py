@@ -10,8 +10,7 @@ enabled = []
 for x in lines:
     line += x
 
-def calc(line: str):
-    ans = 0
+def calc(line: str, ans = 0):
     for x in re.findall(r'mul\([0-9]+\,[0-9]+\)', line):
         i, j = map(int, re.findall('[0-9]+', x)[:2])
         ans += i * j
