@@ -10,7 +10,7 @@ for line in lines:
     first, last = line.split('-')
     for x in range(int(first), int(last)+1):
         x = str(x)
-        if x[0:int(len(x)/2)] == x[int(len(x)/2):int(len(x))+1]:
+        if x[:int(len(x)/2)] == x[int(len(x)/2):]:
             p1 += int(x)
 
         for y in range(2, len(x)+1):
