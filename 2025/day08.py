@@ -31,7 +31,7 @@ def make_circuits(pairs):
     final_a = None
     final_b = None
 
-    for p, pair in enumerate(pairs):
+    for pair in pairs:
         a_circuit = None
         b_circuit = None
         for circuit in circuits:
