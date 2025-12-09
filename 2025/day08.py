@@ -19,8 +19,8 @@ pairs = []
 for x in range(len(junctions)-1):
     for y in range(x+1, len(junctions)):    
         pairs.append({
-            "a": tuple(junctions[x]),
-            "b": tuple(junctions[y]),
+            "a": junctions[x],
+            "b": junctions[y],
             "distance": calc_distance(junctions[x], junctions[y])
             })
 
