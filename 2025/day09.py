@@ -1,4 +1,5 @@
 import time
+from shapely.geometry import Point, Polygon
 
 start_time = time.time()
 p1, p2 = 0, 0
@@ -9,12 +10,25 @@ with open("inputs/inp09.txt") as fh:
 for r, row in enumerate(input):
     input[r] = [int(x) for x in row.split(',')]
 
-areas = []
-for r, row in enumerate(input):
-    for x in range(r+1, len(input)):
-        areas.append((max(row[0], input[x][0]) - min(row[0], input[x][0])+1) * (max(row[1], input[x][1]) - min(row[1], input[x][1])+1))
+all_areas = []
+bounded_areas = []
+bounds = Polygon(input)
 
-p1 = max(areas)
+for i, row in enumerate(input):
+    for j in range(i+1, len(input)):
+        min_x, max_x = sorted([row[0], input[j][0]])
+        min_y, max_y = sorted([row[1], input[j][1]])
+
+        width = max_x - min_x + 1
+        height = max_y - min_y + 1
+        area = width * height
+        all_areas.append(area)
+        
+        shape = Polygon([(min_x, min_y), (min_x, max_y), (max_x, max_y), (max_x, min_y)])
+        if shape.within(bounds): bounded_areas.append(area)
+
+p1 = max(all_areas)
+p2 = max(bounded_areas)
 
 print("P1: ", p1)
 print("P2: ", p2)
