@@ -1,5 +1,5 @@
 import time
-from shapely.geometry import Point, Polygon
+from shapely.geometry import Polygon
 
 start_time = time.time()
 p1, p2 = 0, 0
